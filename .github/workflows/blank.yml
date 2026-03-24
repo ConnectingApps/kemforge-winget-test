@@ -81,6 +81,12 @@ jobs:
           "@
           $content | Out-File -FilePath "$env:MANIFEST_DIR/$env:PACKAGE_IDENTIFIER.locale.en-US.yaml" -Encoding utf8
 
+      - name: Upload manifest files
+        uses: actions/upload-artifact@v6
+        with:
+          name: winget-manifest
+          path: ${{ env.MANIFEST_DIR }}
+
       - name: Print generated manifests
         shell: pwsh
         run: |
