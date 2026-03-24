@@ -125,11 +125,12 @@ jobs:
           winget --version
           Write-Host "Upgrading winget (Microsoft.AppInstaller)..."
           $msixPath = "$env:RUNNER_TEMP\Microsoft.DesktopAppInstaller.msixbundle"
-          $licensePath = "$env:RUNNER_TEMP\winget-license.xml"
           Invoke-WebRequest -Uri "https://aka.ms/getwinget" -OutFile $msixPath -UseBasicParsing
-          Invoke-WebRequest -Uri "https://aka.ms/getwingetlicense" -OutFile $licensePath -UseBasicParsing
-          Add-AppxProvisionedPackage -Online -PackagePath $msixPath -LicensePath $licensePath -ErrorAction SilentlyContinue
-          Add-AppxPackage -Path $msixPath -ErrorAction SilentlyContinue
+          try {
+            Add-AppxPackage -Path $msixPath -ForceApplicationShutdown
+          } catch {
+            Write-Host "::warning::Add-AppxPackage failed: $_"
+          }
           Write-Host "Updated winget version:"
           winget --version
           $global:LASTEXITCODE = 0
