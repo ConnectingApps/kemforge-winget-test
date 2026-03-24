@@ -129,6 +129,11 @@ jobs:
             Write-Host "::warning::winget validate returned exit code $LASTEXITCODE"
           }
 
+      - name: Enable local manifest files
+        shell: pwsh
+        run: |
+          winget settings --enable LocalManifestFiles
+
       - name: Install via manifest
         shell: pwsh
         run: |
