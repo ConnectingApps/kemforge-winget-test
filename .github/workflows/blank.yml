@@ -117,6 +117,23 @@ jobs:
           }
           Write-Host "SHA256 verification passed."
 
+      - name: Upgrade winget
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          Write-Host "Current winget version:"
+          winget --version
+          Write-Host "Upgrading winget (Microsoft.AppInstaller)..."
+          $msixPath = "$env:RUNNER_TEMP\Microsoft.DesktopAppInstaller.msixbundle"
+          $licensePath = "$env:RUNNER_TEMP\winget-license.xml"
+          Invoke-WebRequest -Uri "https://aka.ms/getwinget" -OutFile $msixPath -UseBasicParsing
+          Invoke-WebRequest -Uri "https://aka.ms/getwingetlicense" -OutFile $licensePath -UseBasicParsing
+          Add-AppxProvisionedPackage -Online -PackagePath $msixPath -LicensePath $licensePath -ErrorAction SilentlyContinue
+          Add-AppxPackage -Path $msixPath -ErrorAction SilentlyContinue
+          Write-Host "Updated winget version:"
+          winget --version
+          $global:LASTEXITCODE = 0
+
       - name: Validate manifest with winget
         shell: pwsh
         run: |
@@ -124,9 +141,16 @@ jobs:
           Write-Host "Validating manifest at: $manifestPath"
           $PSNativeCommandUseErrorActionPreference = $false
           winget validate $manifestPath
-          if ($LASTEXITCODE -ne 0) {
-            Write-Host "::warning::winget validate returned exit code $LASTEXITCODE"
+          $ec = $LASTEXITCODE
+          if ($ec -eq 0) {
+            Write-Host "Manifest validation passed."
+          } elseif ($ec -eq -1978335192) {
+            Write-Host "::warning::Manifest validation succeeded with warnings (exit code $ec)"
+          } else {
+            Write-Error "Manifest validation failed with exit code $ec"
+            exit 1
           }
+          $global:LASTEXITCODE = 0
 
       - name: Enable local manifest files
         shell: pwsh
