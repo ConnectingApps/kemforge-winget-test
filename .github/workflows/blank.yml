@@ -178,3 +178,16 @@ jobs:
             exit 1
           }
           Write-Host "kemforge verification passed."
+
+      - name: Verify kemforge HTTP request
+        shell: pwsh
+        run: |
+          Write-Host "Running: kemforge -I https://www.google.com"
+          $output = & kemforge -I https://www.google.com 2>&1
+          $exitCode = $LASTEXITCODE
+          Write-Host $output
+          if ($exitCode -ne 0) {
+            Write-Error "kemforge -I https://www.google.com failed with exit code $exitCode"
+            exit 1
+          }
+          Write-Host "kemforge HTTP request verification passed."
