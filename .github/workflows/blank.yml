@@ -56,8 +56,6 @@ jobs:
           NestedInstallerFiles:
             - RelativeFilePath: kemforge.exe
               PortableCommandAlias: kemforge
-          Commands:
-            - kemforge
           Installers:
             - Architecture: x64
               InstallerUrl: $env:INSTALLER_URL
