@@ -19,7 +19,7 @@ jobs:
       SHORT_DESCRIPTION: "A modern, curl-compatible CLI tool for making web requests with Post-Quantum Cryptography (PQC) support."
       PUBLISHER: Connecting Apps
       PACKAGE_NAME: Kemforge
-      MANIFEST_VERSION: "1.9.0"
+      MANIFEST_VERSION: "1.12.0"
       MANIFEST_DIR: manifests/c/ConnectingApps/Kemforge/1.3.2
 
     steps:
