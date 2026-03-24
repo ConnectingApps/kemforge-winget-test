@@ -17,7 +17,7 @@ jobs:
       INSTALLER_URL: https://github.com/ConnectingApps/kemforge/releases/download/v1.3.2/kemforge.zip
       INSTALLER_SHA256: FBF0E82058E8F2814E1269C0EA2B953C8678F5592CAD6AA8EC8C49E4419A23F4
       SHORT_DESCRIPTION: "A modern, curl-compatible CLI tool for making web requests with Post-Quantum Cryptography (PQC) support."
-      PUBLISHER: ConnectingApps
+      PUBLISHER: Connecting Apps
       PACKAGE_NAME: Kemforge
       MANIFEST_VERSION: "1.9.0"
       MANIFEST_DIR: manifests/c/ConnectingApps/Kemforge/1.3.2
@@ -78,7 +78,7 @@ jobs:
           Publisher: $env:PUBLISHER
           PackageName: $env:PACKAGE_NAME
           ShortDescription: $env:SHORT_DESCRIPTION
-          License: MIT
+          License: GPL-3.0-only
           ManifestType: defaultLocale
           ManifestVersion: $env:MANIFEST_VERSION
           "@
