@@ -1,0 +1,2 @@
+URL: https://github.com/ConnectingApps/kemforge/releases/download/v1.3.2/kemforge.zip
+SHA256: FBF0E82058E8F2814E1269C0EA2B953C8678F5592CAD6AA8EC8C49E4419A23F4
