@@ -35,7 +35,6 @@ jobs:
         shell: pwsh
         run: |
           $content = @"
-          # yaml-language-server: `$schema=https://aka.ms/winget-manifest.version.$env:MANIFEST_VERSION.schema.json
           PackageIdentifier: $env:PACKAGE_IDENTIFIER
           PackageVersion: $env:PACKAGE_VERSION
           DefaultLocale: en-US
@@ -48,7 +47,6 @@ jobs:
         shell: pwsh
         run: |
           $content = @"
-          # yaml-language-server: `$schema=https://aka.ms/winget-manifest.installer.$env:MANIFEST_VERSION.schema.json
           PackageIdentifier: $env:PACKAGE_IDENTIFIER
           PackageVersion: $env:PACKAGE_VERSION
           InstallerType: zip
@@ -69,7 +67,6 @@ jobs:
         shell: pwsh
         run: |
           $content = @"
-          # yaml-language-server: `$schema=https://aka.ms/winget-manifest.defaultLocale.$env:MANIFEST_VERSION.schema.json
           PackageIdentifier: $env:PACKAGE_IDENTIFIER
           PackageVersion: $env:PACKAGE_VERSION
           PackageLocale: en-US
